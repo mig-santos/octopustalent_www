@@ -49,7 +49,8 @@ header .hero-content {
     margin-bottom: 10px;
 }
 
-header h1 {
+/* NEW: Style for the semantic <p> tag replacing <h1> */
+.site-title {
     margin: 0;
     font-size: 3em;
     font-weight: 700;
@@ -103,22 +104,33 @@ main {
     gap: 40px;
 }
 
+/* FIX: This ensures all images are the same size */
 .section-image {
     flex: 0 0 300px;
-    height: 200px;
-    object-fit: cover;
+    width: 300px;       /* Added explicit width */
+    height: 200px;      /* Added explicit height */
+    object-fit: cover;  /* Ensures image fills box without stretching */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.section h2 {
+/* NEW: This wrapper holds the text content in a section */
+.section-content {
+    flex: 1; /* Allows this div to fill the remaining space */
+    text-align: left; /* Ensures text is left-aligned */
+}
+
+/* UPDATED: Selectors are now more specific */
+.section-content h1,
+.section-content h2 {
     color: #001f3f;
     font-size: 2.5em;
     font-weight: 600;
     margin-bottom: 20px;
 }
 
-.section p {
+/* UPDATED: Selectors are now more specific */
+.section-content p {
     font-size: 1.1em;
     margin-bottom: 15px;
     color: #555;
@@ -132,14 +144,17 @@ hr {
     margin: 60px 0;
 }
 
+/* UPDATED: Removed text-align: center from the section */
 #contact {
-    text-align: center;
+    /* The .section styles already apply */
 }
 
+/* FIX: This makes the form the second column and fixes label alignment */
 #contact form {
+    flex: 1; /* Allows the form to take up space */
     max-width: 600px;
-    margin: 40px auto 0;
-    text-align: left;
+    margin: 0; /* Removed old margin */
+    text-align: left; /* Fixes centered labels */
 }
 
 #contact label {
@@ -194,7 +209,8 @@ footer {
 
 /* Responsive design */
 @media (max-width: 768px) {
-    header h1 {
+    /* UPDATED: Changed from h1 to .site-title */
+    .site-title {
         font-size: 2.2em;
     }
 
@@ -211,6 +227,16 @@ footer {
     .section {
         flex-direction: column;
         text-align: center;
+    }
+
+    /* NEW: Ensures text content is centered on mobile */
+    .section-content {
+        text-align: center;
+    }
+
+    /* NEW: Ensures form labels are still left-aligned on mobile */
+    #contact form {
+        text-align: left;
     }
 
     .section-image {
