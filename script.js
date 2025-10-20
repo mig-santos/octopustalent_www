@@ -5,7 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update text content
     document.querySelectorAll('[data-en][data-pt]').forEach(element => {
-        element.textContent = element.getAttribute(`data-${lang}`);
+        // Handle the site title <p> tag as well
+        if (element.tagName === 'P' && element.classList.contains('site-title')) {
+            element.textContent = element.getAttribute(`data-${lang}`);
+        } else if (element.tagName !== 'TITLE') {
+             // Avoid changing the title tag's textContent directly here
+             element.textContent = element.getAttribute(`data-${lang}`);
+        }
     });
 
     // Update HTML lang attribute
@@ -16,14 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update title
     const titleElement = document.querySelector('title');
-    titleElement.textContent = titleElement.getAttribute(`data-${lang}`);
+    if (titleElement) {
+        titleElement.textContent = titleElement.getAttribute(`data-${lang}`);
+    }
 
     // Form submission handler
     const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (form.name.value && form.email.value && form.message.value) {
+            
+            // FIX: Added 'form.subject.value' to the validation check
+            if (form.name.value && form.email.value && form.subject.value && form.message.value) {
                 const message = isPortuguese 
                     ? 'Obrigado pela sua mensagem! Entraremos em contato em breve.'
                     : 'Thank you for your message! We will get back to you soon.';
