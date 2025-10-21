@@ -1,12 +1,17 @@
 // Use async function for the event listener to allow 'await'
 document.addEventListener('DOMContentLoaded', async function() {
     
-    // Determine language
+    // Determine language and form ID
     const isPortuguese = window.location.hostname.includes('octopustalent.pt');
-    //const isPortuguese = true; // Forcing Portuguese
-    //const isPortuguese = false; // Forcing English
-    
     const lang = isPortuguese ? 'pt' : 'en';
+    
+    // *** NEW: Select the correct Formspree ID based on the domain ***
+    const formspreeIDs = {
+        en: 'xzzjqynj', // The ID for octopustalent.eu
+        pt: 'mvgwndpk'  // The ID for octopustalent.pt
+    };
+    const formId = formspreeIDs[lang];
+
 
     // Set HTML lang attributes immediately
     document.documentElement.lang = lang;
@@ -47,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         if (form && formStatus) {
             const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent; // Store original text
+            const originalButtonText = submitButton.textContent; 
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -56,7 +61,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const successText = getString(strings, 'contactPage.formStatus.success');
                 const errorText = getString(strings, 'contactPage.formStatus.error');
                 
-                // Update UI to show submission is in progress
                 submitButton.textContent = sendingText;
                 submitButton.disabled = true;
                 formStatus.className = '';
@@ -65,8 +69,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const formData = new FormData(form);
                 
                 try {
-                    // IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree ID
-                    const response = await fetch('https://formspree.io/f/mvgwndpk', {
+                    // *** NEW: The URL now uses the dynamic formId variable ***
+                    const response = await fetch(`https://formspree.io/f/${formId}`, {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -86,7 +90,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                     formStatus.textContent = errorText;
                     formStatus.className = 'error';
                 } finally {
-                    // Restore button state
                     submitButton.textContent = originalButtonText;
                     submitButton.disabled = false;
                 }
@@ -98,3 +101,4 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.body.innerHTML = '<p style="text-align: center; padding: 50px;">Error loading page content. Please try again later.</p>';
     }
 });
+
