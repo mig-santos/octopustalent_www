@@ -1,0 +1,40 @@
+{
+  "common": {
+    "siteTitle": "Octopustalent",
+    "siteDescription": "Consultoria Especializada em Tecnologias de Informação",
+    "footer": "© 2025 Octopustalent. Todos os direitos reservados."
+  },
+  "nav": {
+    "home": "Início",
+    "contact": "Contacto"
+  },
+  "homePage": {
+    "title": "Octopustalent - Consultoria de TI e Soluções Oracle",
+    "whatWeDo": {
+      "heading": "O que fazemos",
+      "p1": "Somos uma consultora de TI dedicada a impulsionar a transformação digital dos nossos clientes. Desenhamos e implementamos soluções robustas, desde aplicações web e móveis a infraestruturas complexas, para otimizar operações e potenciar o crescimento.",
+      "p2": "A nossa missão é ser o seu parceiro tecnológico estratégico. Focamo-nos em entregar valor real, aumentando a produtividade e a eficiência do seu negócio para garantir resultados mensuráveis e um sucesso sustentado."
+    },
+    "howWeDoIt": {
+      "heading": "As Nossas Competências",
+      "p1": "A nossa equipa multidisciplinar é especialista num vasto leque de tecnologias. Oferecemos consultoria e implementação em: soluções IoT, automação de processos DevOps e CI/CD, desenvolvimento de backend, e formação de equipas técnicas.",
+      "p2": "Possuímos uma profunda especialização em soluções Oracle, incluindo a gestão de bases de dados, otimização de ambientes e desenvolvimento de aplicações de alto rendimento com Oracle APEX."
+    }
+  },
+  "contactPage": {
+    "title": "Contacto - Octopustalent",
+    "heading": "Contacte-nos",
+    "intro": "Fale connosco sobre os seus desafios de TI. A nossa equipa está pronta para ajudar a transformar o seu negócio com soluções inovadoras e à medida das suas necessidades.",
+    "form": {
+      "name": "Nome:",
+      "email": "E-mail:",
+      "subject": "Assunto:",
+      "message": "Mensagem:",
+      "submit": "Enviar Mensagem"
+    },
+    "alerts": {
+      "success": "Agradecemos a sua mensagem. Entraremos em contacto assim que possível.",
+      "error": "Por favor, preencha todos os campos obrigatórios."
+    }
+  }
+}

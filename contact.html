@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="en">
-    <link rel="canonical" href="https://octopustalent.eu">
-    <title data-en="Contact - Octopustalent" data-pt="Contato - Octopustalent">Contact - Octopustalent</title>
+    <meta name="language" content="en"> <link rel="canonical" href="https://octopustalent.eu">
+    
+    <title data-key="contactPage.title">Contact - Octopustalent</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="hero" style="background-image: url('hero-bg.jpg');">
+    <header class="hero" style="background-image: url('images/hero-bg.jpg');">
         <nav>
             <ul>
-                <li><a href="index.html" data-en="Home" data-pt="Início">Home</a></li>
-                <li><a href="contact.html" data-en="Contact" data-pt="Contato">Contact</a></li>
+                <li><a href="index.html" data-key="nav.home"></a></li>
+                <li><a href="contact.html" data-key="nav.contact"></a></li>
             </ul>
         </nav>
         <div class="hero-content">
-            <img src="logo.png" alt="Octopustalent" class="logo">
+            <img src="images/logo.png" alt="Octopustalent" class="logo">
             
-            <p class="site-title" data-en="Octopustalent" data-pt="Octopustalent">Octopustalent</p> 
-            
-            <p data-en="An IT Consulting Company" data-pt="Uma Empresa de Consultoria de TI">An IT Consulting Company</p>
+            <p class="site-title" data-key="common.siteTitle"></p> 
+            <p data-key="common.siteDescription"></p>
         </div>
     </header>
 
@@ -32,30 +31,30 @@
         <section id="contact" class="section">
             
             <div class="section-content">
-                <h1 data-en="Contact Us" data-pt="Entre em Contato">Contact Us</h1>
-                <p data-en="Get in touch with us for your IT consulting needs. We're here to help transform your business with innovative solutions." data-pt="Entre em contato conosco para suas necessidades de consultoria de TI. Estamos aqui para ajudar a transformar seu negócio com soluções inovadoras.">Get in touch with us for your IT consulting needs. We're here to help transform your business with innovative solutions.</p>
+                <h1 data-key="contactPage.heading"></h1>
+                <p data-key="contactPage.intro"></p>
             </div>
 
             <form id="contact-form">
-                <label for="name" data-en="Name:" data-pt="Nome:">Name:</label>
+                <label for="name" data-key="contactPage.form.name"></label>
                 <input type="text" id="name" name="name" required>
 
-                <label for="email" data-en="Email:" data-pt="E-mail:">Email:</label>
+                <label for="email" data-key="contactPage.form.email"></label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="subject" data-en="Subject:" data-pt="Assunto:">Subject:</label>
+                <label for="subject" data-key="contactPage.form.subject"></label>
                 <input type="text" id="subject" name="subject" required>
 
-                <label for="message" data-en="Message:" data-pt="Mensagem:">Message:</label>
+                <label for="message" data-key="contactPage.form.message"></label>
                 <textarea id="message" name="message" required></textarea>
 
-                <button type="submit" data-en="Send Message" data-pt="Enviar Mensagem">Send Message</button>
+                <button type="submit" data-key="contactPage.form.submit"></button>
             </form>
         </section>
     </main>
 
     <footer>
-        <p data-en="&copy; 2025 Octopustalent. All rights reserved." data-pt="&copy; 2025 Octopustalent. Todos os direitos reservados.">&copy; 2025 Octopustalent. All rights reserved.</p>
+        <p data-key="common.footer"></p>
     </footer>
 
     <script src="script.js"></script>
