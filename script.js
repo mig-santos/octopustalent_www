@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // *** NEW: Select the correct Formspree ID based on the domain ***
     const formspreeIDs = {
-        en: 'xzzjqynj', // The ID for octopustalent.eu
+        en: 'xanpzvwo', // The ID for octopustalent.eu
         pt: 'mvgwndpk'  // The ID for octopustalent.pt
     };
     const formId = formspreeIDs[lang];
