@@ -32,9 +32,11 @@
       "message": "Mensagem:",
       "submit": "Enviar Mensagem"
     },
-    "alerts": {
-      "success": "Agradecemos a sua mensagem. Entraremos em contacto assim que possível.",
-      "error": "Por favor, preencha todos os campos obrigatórios."
+    "formStatus": {
+      "sending": "A enviar...",
+      "success": "Obrigado! A sua mensagem foi enviada com sucesso.",
+      "error": "Oops! Ocorreu um problema ao enviar a sua mensagem. Por favor, tente novamente mais tarde."
     }
   }
 }
+

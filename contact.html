@@ -43,9 +43,8 @@
 
                 <label for="email" data-key="contactPage.form.email"></label>
                 <input type="email" id="email" name="email" required>
-
-                <label for="subject" data-key="contactPage.form.subject"></label>
-                <input type="text" id="subject" name="subject" required>
+                
+                <input name="subject" type="hidden" value="Contact from {{ name }}" />
 
                 <label for="message" data-key="contactPage.form.message"></label>
                 <textarea id="message" name="message" required></textarea>
