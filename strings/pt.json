@@ -1,0 +1,40 @@
+{
+  "common": {
+    "siteTitle": "Octopustalent",
+    "siteDescription": "Uma Empresa de Consultoria de TI",
+    "footer": "© 2025 Octopustalent. Todos os direitos reservados."
+  },
+  "nav": {
+    "home": "Início",
+    "contact": "Contato"
+  },
+  "homePage": {
+    "title": "Octopustalent - Consultoria de TI",
+    "whatWeDo": {
+      "heading": "O que fazemos",
+      "p1": "Nosso objetivo é estar na vanguarda da revolução digital, dedicados a transformar a forma como as empresas operam por meio de aplicações web e móveis integradas com a Internet das Coisas (IoT).",
+      "p2": "A missão é simples: agregar valor às operações dos nossos clientes, aumentar sua produtividade e elevar seu desempenho geral nos negócios."
+    },
+    "howWeDoIt": {
+      "heading": "Como fazemos",
+      "p1": "Ao integrar a tecnologia IoT em nossas aplicações, permitimos que os clientes monitorem seus ativos, acompanhem métricas de desempenho e obtenham insights acionáveis. Essa conectividade permite manutenção proativa, melhores interações com os clientes e maior eficiência operacional, resultando em economias significativas de custos e melhoria na entrega de serviços.",
+      "p2": "IoT não é apenas uma palavra da moda, é um divisor de águas para empresas em todos os setores."
+    }
+  },
+  "contactPage": {
+    "title": "Contato - Octopustalent",
+    "heading": "Entre em Contato",
+    "intro": "Entre em contato conosco para suas necessidades de consultoria de TI. Estamos aqui para ajudar a transformar seu negócio com soluções inovadoras.",
+    "form": {
+      "name": "Nome:",
+      "email": "E-mail:",
+      "subject": "Assunto:",
+      "message": "Mensagem:",
+      "submit": "Enviar Mensagem"
+    },
+    "alerts": {
+      "success": "Obrigado pela sua mensagem! Entraremos em contato em breve.",
+      "error": "Por favor, preencha todos os campos obrigatórios."
+    }
+  }
+}

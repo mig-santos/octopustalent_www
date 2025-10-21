@@ -1,50 +1,67 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Language switcher based on domain
-    const isPortuguese = window.location.hostname.includes('octopustalent.pt');
+// Use async function for the event listener to allow 'await'
+document.addEventListener('DOMContentLoaded', async function() {
+    
+    // Determine language
+    const isPortuguese = true; // Forcing Portuguese
+    //const isPortuguese = window.location.hostname.includes('octopustalent.pt');
+    
     const lang = isPortuguese ? 'pt' : 'en';
 
-    // Update text content
-    document.querySelectorAll('[data-en][data-pt]').forEach(element => {
-        // Handle the site title <p> tag as well
-        if (element.tagName === 'P' && element.classList.contains('site-title')) {
-            element.textContent = element.getAttribute(`data-${lang}`);
-        } else if (element.tagName !== 'TITLE') {
-             // Avoid changing the title tag's textContent directly here
-             element.textContent = element.getAttribute(`data-${lang}`);
-        }
-    });
-
-    // Update HTML lang attribute
+    // Set HTML lang attributes immediately
     document.documentElement.lang = lang;
-
-    // Update meta language tag
     document.querySelector('meta[name="language"]').setAttribute('content', lang);
 
-    // Update title
-    const titleElement = document.querySelector('title');
-    if (titleElement) {
-        titleElement.textContent = titleElement.getAttribute(`data-${lang}`);
+    // Helper function to get nested values from JSON
+    // e.g., getString(strings, "nav.home") -> "Home"
+    function getString(obj, key) {
+        return key.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : null), obj);
     }
 
-    // Form submission handler
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    try {
+        // 1. Fetch the string file
+        const response = await fetch(`strings/${lang}.json`); // e.g., en.json
+        if (!response.ok) {
+            throw new Error('Language file not found');
+        }
+        const strings = await response.json();
+
+        // 2. Populate all elements with a data-key
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.getAttribute('data-key');
+            const value = getString(strings, key);
             
-            // FIX: Added 'form.subject.value' to the validation check
-            if (form.name.value && form.email.value && form.subject.value && form.message.value) {
-                const message = isPortuguese 
-                    ? 'Obrigado pela sua mensagem! Entraremos em contato em breve.'
-                    : 'Thank you for your message! We will get back to you soon.';
-                alert(message);
-                form.reset();
+            if (value) {
+                // Handle different element types
+                if (element.tagName === 'TITLE') {
+                    element.textContent = value;
+                } else {
+                    element.textContent = value;
+                }
             } else {
-                const message = isPortuguese 
-                    ? 'Por favor, preencha todos os campos obrigatórios.'
-                    : 'Please fill in all required fields.';
-                alert(message);
+                console.warn(`Missing string for key: ${key}`);
+                element.textContent = key; // Show the key as a fallback
             }
         });
+
+        // 3. Update form handler
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (form.name.value && form.email.value && form.subject.value && form.message.value) {
+                    // Get alert strings from the loaded JSON
+                    alert(getString(strings, 'contactPage.alerts.success'));
+                    form.reset();
+                } else {
+                    // Get alert strings from the loaded JSON
+                    alert(getString(strings, 'contactPage.alerts.error'));
+                }
+            });
+        }
+
+    } catch (error) {
+        console.error('Failed to load language file:', error);
+        // Fallback: show an error
+        document.body.innerHTML = 'Error loading page content. Please try again later.';
     }
 });
