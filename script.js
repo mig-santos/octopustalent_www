@@ -2,8 +2,9 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
     // Determine language
-    const isPortuguese = true; // Forcing Portuguese
-    //const isPortuguese = window.location.hostname.includes('octopustalent.pt');
+    const isPortuguese = window.location.hostname.includes('octopustalent.pt');
+    //const isPortuguese = true; // Forcing Portuguese
+    //const isPortuguese = false; // Forcing English
     
     const lang = isPortuguese ? 'pt' : 'en';
 

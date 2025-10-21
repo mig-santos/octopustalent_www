@@ -1,30 +1,30 @@
 {
   "common": {
     "siteTitle": "Octopustalent",
-    "siteDescription": "Uma Empresa de Consultoria de TI",
+    "siteDescription": "Consultoria Especializada em Tecnologias de Informação",
     "footer": "© 2025 Octopustalent. Todos os direitos reservados."
   },
   "nav": {
     "home": "Início",
-    "contact": "Contato"
+    "contact": "Contacto"
   },
   "homePage": {
-    "title": "Octopustalent - Consultoria de TI",
+    "title": "Octopustalent - Consultoria de TI e Soluções Oracle",
     "whatWeDo": {
       "heading": "O que fazemos",
-      "p1": "Nosso objetivo é estar na vanguarda da revolução digital, dedicados a transformar a forma como as empresas operam por meio de aplicações web e móveis integradas com a Internet das Coisas (IoT).",
-      "p2": "A missão é simples: agregar valor às operações dos nossos clientes, aumentar sua produtividade e elevar seu desempenho geral nos negócios."
+      "p1": "Somos uma consultora de TI dedicada a impulsionar a transformação digital dos nossos clientes. Desenhamos e implementamos soluções robustas, desde aplicações web e móveis a infraestruturas complexas, para otimizar operações e potenciar o crescimento.",
+      "p2": "A nossa missão é ser o seu parceiro tecnológico estratégico. Focamo-nos em entregar valor real, aumentando a produtividade e a eficiência do seu negócio para garantir resultados mensuráveis e um sucesso sustentado."
     },
     "howWeDoIt": {
-      "heading": "Como fazemos",
-      "p1": "Ao integrar a tecnologia IoT em nossas aplicações, permitimos que os clientes monitorem seus ativos, acompanhem métricas de desempenho e obtenham insights acionáveis. Essa conectividade permite manutenção proativa, melhores interações com os clientes e maior eficiência operacional, resultando em economias significativas de custos e melhoria na entrega de serviços.",
-      "p2": "IoT não é apenas uma palavra da moda, é um divisor de águas para empresas em todos os setores."
+      "heading": "As Nossas Competências",
+      "p1": "A nossa equipa multidisciplinar é especialista num vasto leque de tecnologias. Oferecemos consultoria e implementação em: soluções IoT, automação de processos DevOps e CI/CD, desenvolvimento de backend, e formação de equipas técnicas.",
+      "p2": "Possuímos uma profunda especialização em soluções Oracle, incluindo a gestão de bases de dados, otimização de ambientes e desenvolvimento de aplicações de alto rendimento com Oracle APEX."
     }
   },
   "contactPage": {
-    "title": "Contato - Octopustalent",
-    "heading": "Entre em Contato",
-    "intro": "Entre em contato conosco para suas necessidades de consultoria de TI. Estamos aqui para ajudar a transformar seu negócio com soluções inovadoras.",
+    "title": "Contacto - Octopustalent",
+    "heading": "Contacte-nos",
+    "intro": "Fale connosco sobre os seus desafios de TI. A nossa equipa está pronta para ajudar a transformar o seu negócio com soluções inovadoras e à medida das suas necessidades.",
     "form": {
       "name": "Nome:",
       "email": "E-mail:",
@@ -33,7 +33,7 @@
       "submit": "Enviar Mensagem"
     },
     "alerts": {
-      "success": "Obrigado pela sua mensagem! Entraremos em contato em breve.",
+      "success": "Agradecemos a sua mensagem. Entraremos em contacto assim que possível.",
       "error": "Por favor, preencha todos os campos obrigatórios."
     }
   }

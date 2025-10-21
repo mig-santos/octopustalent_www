@@ -1,7 +1,7 @@
 {
   "common": {
     "siteTitle": "Octopustalent",
-    "siteDescription": "An IT Consulting Company",
+    "siteDescription": "Expert Information Technology Consulting",
     "footer": "© 2025 Octopustalent. All rights reserved."
   },
   "nav": {
@@ -9,22 +9,22 @@
     "contact": "Contact"
   },
   "homePage": {
-    "title": "Octopustalent - IT Consulting",
+    "title": "Octopustalent - IT Consulting & Oracle Solutions",
     "whatWeDo": {
-      "heading": "What we do",
-      "p1": "We aim to be at the forefront of the digital revolution, dedicated to transforming the way businesses operate through web and mobile applications integrated with the Internet of Things (IoT).",
-      "p2": "The mission is simple: to add value to our clients operations, enhance their productivity, and elevate their overall business performance."
+      "heading": "What We Do",
+      "p1": "We are an IT consulting firm dedicated to driving our clients' digital transformation. We design and implement robust solutions, from web and mobile applications to complex infrastructures, to optimize operations and fuel growth.",
+      "p2": "Our mission is to be your strategic technology partner. We focus on delivering real value, increasing your business's productivity and efficiency to ensure measurable results and sustained success."
     },
     "howWeDoIt": {
-      "heading": "How we do it",
-      "p1": "By integrating IoT technology into our applications, we enable clients to monitor their assets, track performance metrics, and gain actionable insights. This connectivity allows for proactive maintenance, improved customer interactions, and increased operational efficiency, leading to significant cost savings and enhanced service delivery.",
-      "p2": "IoT is not just a buzzword, it’s a game-changer for businesses across all sectors."
+      "heading": "Our Expertise",
+      "p1": "Our multidisciplinary team specializes in a wide range of technologies. We offer consulting and implementation in: IoT solutions, DevOps and CI/CD process automation, backend development, and technical team training.",
+      "p2": "We possess deep expertise in Oracle solutions, including database management, environment optimization, and the development of high-performance applications with Oracle APEX."
     }
   },
   "contactPage": {
     "title": "Contact - Octopustalent",
     "heading": "Contact Us",
-    "intro": "Get in touch with us for your IT consulting needs. We're here to help transform your business with innovative solutions.",
+    "intro": "Talk to us about your IT challenges. Our team is ready to help transform your business with innovative solutions tailored to your needs.",
     "form": {
       "name": "Name:",
       "email": "Email:",
@@ -33,7 +33,7 @@
       "submit": "Send Message"
     },
     "alerts": {
-      "success": "Thank you for your message! We will get back to you soon.",
+      "success": "Thank you for your message. We will get back to you as soon as possible.",
       "error": "Please fill in all required fields."
     }
   }
