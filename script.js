@@ -10,17 +10,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Set HTML lang attributes immediately
     document.documentElement.lang = lang;
-    document.querySelector('meta[name="language"]').setAttribute('content', lang);
+    const metaLang = document.querySelector('meta[name="language"]');
+    if (metaLang) {
+        metaLang.setAttribute('content', lang);
+    }
 
     // Helper function to get nested values from JSON
-    // e.g., getString(strings, "nav.home") -> "Home"
     function getString(obj, key) {
         return key.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : null), obj);
     }
 
     try {
         // 1. Fetch the string file
-        const response = await fetch(`strings/${lang}.json`); // e.g., en.json
+        const response = await fetch(`strings/${lang}.json`);
         if (!response.ok) {
             throw new Error('Language file not found');
         }
@@ -32,37 +34,67 @@ document.addEventListener('DOMContentLoaded', async function() {
             const value = getString(strings, key);
             
             if (value) {
-                // Handle different element types
-                if (element.tagName === 'TITLE') {
-                    element.textContent = value;
-                } else {
-                    element.textContent = value;
-                }
+                element.textContent = value;
             } else {
                 console.warn(`Missing string for key: ${key}`);
                 element.textContent = key; // Show the key as a fallback
             }
         });
 
-        // 3. Update form handler
+        // 3. Handle form submission with AJAX
         const form = document.getElementById('contact-form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
+        const formStatus = document.getElementById('form-status');
+
+        if (form && formStatus) {
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent; // Store original text
+
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                if (form.name.value && form.email.value && form.subject.value && form.message.value) {
-                    // Get alert strings from the loaded JSON
-                    alert(getString(strings, 'contactPage.alerts.success'));
-                    form.reset();
-                } else {
-                    // Get alert strings from the loaded JSON
-                    alert(getString(strings, 'contactPage.alerts.error'));
+                
+                const sendingText = getString(strings, 'contactPage.formStatus.sending');
+                const successText = getString(strings, 'contactPage.formStatus.success');
+                const errorText = getString(strings, 'contactPage.formStatus.error');
+                
+                // Update UI to show submission is in progress
+                submitButton.textContent = sendingText;
+                submitButton.disabled = true;
+                formStatus.className = '';
+                formStatus.textContent = '';
+
+                const formData = new FormData(form);
+                
+                try {
+                    // IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree ID
+                    const response = await fetch('https://formspree.io/f/mvgwndpk', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        formStatus.textContent = successText;
+                        formStatus.className = 'success';
+                        form.reset();
+                    } else {
+                        throw new Error('Server responded with an error');
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    formStatus.textContent = errorText;
+                    formStatus.className = 'error';
+                } finally {
+                    // Restore button state
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
                 }
             });
         }
 
     } catch (error) {
         console.error('Failed to load language file:', error);
-        // Fallback: show an error
-        document.body.innerHTML = 'Error loading page content. Please try again later.';
+        document.body.innerHTML = '<p style="text-align: center; padding: 50px;">Error loading page content. Please try again later.</p>';
     }
 });
