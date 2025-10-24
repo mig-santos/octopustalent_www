@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="language" content="en"> <!-- Updated by JS -->
-    <link rel="canonical" href="https://octopustalent.eu">
+<link rel="canonical" href="https://octopustalent.eu">
     
     <title data-key="contactPage.title">Contact - Octopustalent</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,26 +36,33 @@
             <div class="section-content">
                 <h1 data-key="contactPage.heading"></h1>
                 <p data-key="contactPage.intro"></p>
+                
+                <!-- New contact information with icons --><div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:contact@octopustalent.com" data-key="contactPage.email"></a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+15551234567" data-key="contactPage.phone"></a>
+                    </div>
+                </div>
             </div>
 
             <form id="contact-form">
-                <label for="name" data-key="contactPage.form.name"></label>
-                <input type="text" id="name" name="name" required>
+                <label for="name" class="sr-only" data-key="contactPage.form.name"></label>
+                <input type="text" id="name" name="name" required data-key="contactPage.form.namePlaceholder">
 
-                <label for="email" data-key="contactPage.form.email"></label>
-                <input type="email" id="email" name="email" required>
+                <label for="email" class="sr-only" data-key="contactPage.form.email"></label>
+                <input type="email" id="email" name="email" required data-key="contactPage.form.emailPlaceholder">
 
                 <input name="subject" type="hidden" value="Contact from {{ name }}" />
 
-                <label for="message" data-key="contactPage.form.message"></label>
-                <textarea id="message" name="message" required></textarea>
+                <label for="message" class="sr-only" data-key="contactPage.form.message"></label>
+                <textarea id="message" name="message" required data-key="contactPage.form.messagePlaceholder"></textarea>
 
                 <button type="submit" data-key="contactPage.form.submit"></button>
 
-                <!-- 
-                  FIX: Moved the form-status div INSIDE the form, 
-                  right after the button for much better UX.
-                -->
                 <div id="form-status"></div>
             </form>
         </section>
