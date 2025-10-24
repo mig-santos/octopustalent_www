@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Updated by JS -->
+<html lang="en"> 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="en"> <!-- Updated by JS -->
-    <link rel="canonical" href="https://octopustalent.eu">
+    <meta name="language" content="en"> 
+
+<link rel="canonical" href="https://octopustalent.eu">
     
     <title data-key="contactPage.title">Contact - Octopustalent</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -37,14 +41,18 @@
                 <h1 data-key="contactPage.heading"></h1>
                 <p data-key="contactPage.intro"></p>
                 
-                <!-- New contact information with icons --><div class="contact-info">
+                
+
+<div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:contact@octopustalent.com" data-key="contactPage.email"></a>
+                        <!-- UPDATED: Added data-href-key and removed hard-coded href -->
+                        <a data-key="contactPage.email" data-href-key="contactPage.emailHref"></a>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt"></i>
-                        <a href="tel:+15551234567" data-key="contactPage.phone"></a>
+                        <!-- UPDATED: Added data-href-key and removed hard-coded href -->
+                        <a data-key="contactPage.phone" data-href-key="contactPage.phoneHref"></a>
                     </div>
                 </div>
             </div>

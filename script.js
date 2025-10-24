@@ -34,27 +34,34 @@ document.addEventListener('DOMContentLoaded', async function() {
         // 2. Populate all elements with a data-key
         document.querySelectorAll('[data-key]').forEach(element => {
             const key = element.getAttribute('data-key');
-            const value = getString(strings, key);
             
-            if (value) {
-                // --- THIS IS THE FIX ---
-                const tagName = element.tagName;
-                if (tagName === 'TITLE') {
-                    // Set page title
-                    element.textContent = value;
-                } else if (tagName === 'INPUT' || tagName === 'TEXTAREA') {
-                    // Set placeholder text for form fields
-                    element.placeholder = value;
+            // Set text content or placeholder
+            if (key) {
+                const value = getString(strings, key);
+                if (value) {
+                    const tagName = element.tagName;
+                    if (tagName === 'TITLE') {
+                        element.textContent = value;
+                    } else if (tagName === 'INPUT' || tagName === 'TEXTAREA') {
+                        element.placeholder = value;
+                    } else {
+                        element.textContent = value;
+                    }
                 } else {
-                    // Set text for all other elements (p, h1, button, a, label)
-                    element.textContent = value;
+                    console.warn(`Missing string for key: ${key}`);
+                    element.textContent = key; // Show the key as a fallback
                 }
-                // --- END OF FIX ---
-                
-            } else {
-                console.warn(`Missing string for key: ${key}`);
-                element.textContent = key; // Show the key as a fallback
             }
+
+            // --- NEW: Set href attribute ---
+            const hrefKey = element.getAttribute('data-href-key');
+            if (hrefKey) {
+                const hrefValue = getString(strings, hrefKey);
+                if (hrefValue) {
+                    element.href = hrefValue;
+                }
+            }
+            // --- End of new code ---
         });
 
         // 3. Update form handler
@@ -72,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 
                 // Show "Sending..." message
                 formStatus.textContent = sendingMsg;
-                formStatus.className = 'info'; // Use this for a neutral "sending" style if you add one
+                formStatus.className = 'info'; 
                 formStatus.style.display = 'block';
 
                 const formData = new FormData(form);
