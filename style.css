@@ -259,12 +259,6 @@ footer {
         text-align: left;
     }
     
-    /* FIX: The responsive override for #form-status is no longer needed.
-      The new style works perfectly on mobile already.
-    */
-    
-    /* FIX: The responsive override for footer is no longer needed. */
-
     .section-image {
         flex: none;
         width: 100%;
