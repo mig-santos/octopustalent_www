@@ -25,11 +25,16 @@
     "title": "Contacto - Octopustalent",
     "heading": "Contacte-nos",
     "intro": "Fale connosco sobre os seus desafios de TI. A nossa equipa está pronta para ajudar a transformar o seu negócio com soluções inovadoras e à medida das suas necessidades.",
+    "email": "contact@octopustalent.com",
+    "phone": "(+351) 929 064 777",
     "form": {
       "name": "Nome:",
       "email": "E-mail:",
       "subject": "Assunto:",
       "message": "Mensagem:",
+      "namePlaceholder": "O seu Nome",
+      "emailPlaceholder": "O seu E-mail",
+      "messagePlaceholder": "A sua Mensagem",
       "submit": "Enviar Mensagem"
     },
     "formStatus": {
