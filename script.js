@@ -1,24 +1,22 @@
 // Use async function for the event listener to allow 'await'
 document.addEventListener('DOMContentLoaded', async function() {
     
-    // Determine language and form ID
+    // Determine language
     const isPortuguese = window.location.hostname.includes('octopustalent.pt');
     const lang = isPortuguese ? 'pt' : 'en';
-    
-    // *** NEW: Select the correct Formspree ID based on the domain ***
-    const formspreeIDs = {
-        en: 'xanpzvwo', // The ID for octopustalent.eu
-        pt: 'xnngylrp'  // The ID for octopustalent.pt
-    };
-    const formId = formspreeIDs[lang];
-
 
     // Set HTML lang attributes immediately
     document.documentElement.lang = lang;
-    const metaLang = document.querySelector('meta[name="language"]');
-    if (metaLang) {
-        metaLang.setAttribute('content', lang);
-    }
+    document.querySelector('meta[name="language"]').setAttribute('content', lang);
+
+    // --- Formspree Form IDs ---
+    // !! IMPORTANT: Replace with your actual Formspree IDs !!
+    const formId_EU = 'xanpzvwo'; // The ID for octopustalent.eu
+    const formId_PT = 'xnngylrp'; // The ID for octopustalent.pt
+    
+    // Choose the correct ID based on the language
+    const formId = isPortuguese ? formId_PT : formId_EU;
+
 
     // Helper function to get nested values from JSON
     function getString(obj, key) {
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     try {
         // 1. Fetch the string file
-        const response = await fetch(`strings/${lang}.json`);
+        const response = await fetch(`strings/${lang}.json`); // e.g., strings/en.json
         if (!response.ok) {
             throw new Error('Language file not found');
         }
@@ -39,37 +37,47 @@ document.addEventListener('DOMContentLoaded', async function() {
             const value = getString(strings, key);
             
             if (value) {
-                element.textContent = value;
+                // --- THIS IS THE FIX ---
+                const tagName = element.tagName;
+                if (tagName === 'TITLE') {
+                    // Set page title
+                    element.textContent = value;
+                } else if (tagName === 'INPUT' || tagName === 'TEXTAREA') {
+                    // Set placeholder text for form fields
+                    element.placeholder = value;
+                } else {
+                    // Set text for all other elements (p, h1, button, a, label)
+                    element.textContent = value;
+                }
+                // --- END OF FIX ---
+                
             } else {
                 console.warn(`Missing string for key: ${key}`);
                 element.textContent = key; // Show the key as a fallback
             }
         });
 
-        // 3. Handle form submission with AJAX
+        // 3. Update form handler
         const form = document.getElementById('contact-form');
         const formStatus = document.getElementById('form-status');
-
+        
         if (form && formStatus) {
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent; 
-
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
+
+                // Get strings for status messages
+                const sendingMsg = getString(strings, 'contactPage.formStatus.sending');
+                const successMsg = getString(strings, 'contactPage.formStatus.success');
+                const errorMsg = getString(strings, 'contactPage.formStatus.error');
                 
-                const sendingText = getString(strings, 'contactPage.formStatus.sending');
-                const successText = getString(strings, 'contactPage.formStatus.success');
-                const errorText = getString(strings, 'contactPage.formStatus.error');
-                
-                submitButton.textContent = sendingText;
-                submitButton.disabled = true;
-                formStatus.className = '';
-                formStatus.textContent = '';
+                // Show "Sending..." message
+                formStatus.textContent = sendingMsg;
+                formStatus.className = 'info'; // Use this for a neutral "sending" style if you add one
+                formStatus.style.display = 'block';
 
                 const formData = new FormData(form);
                 
                 try {
-                    // *** NEW: The URL now uses the dynamic formId variable ***
                     const response = await fetch(`https://formspree.io/f/${formId}`, {
                         method: 'POST',
                         body: formData,
@@ -79,26 +87,28 @@ document.addEventListener('DOMContentLoaded', async function() {
                     });
 
                     if (response.ok) {
-                        formStatus.textContent = successText;
+                        // Show success message
+                        formStatus.textContent = successMsg;
                         formStatus.className = 'success';
-                        form.reset();
+                        form.reset(); // Clear the form
                     } else {
-                        throw new Error('Server responded with an error');
+                        // Show server error message
+                        formStatus.textContent = errorMsg;
+                        formStatus.className = 'error';
                     }
                 } catch (error) {
+                    // Show network error message
                     console.error('Form submission error:', error);
-                    formStatus.textContent = errorText;
+                    formStatus.textContent = errorMsg;
                     formStatus.className = 'error';
-                } finally {
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
                 }
             });
         }
 
     } catch (error) {
         console.error('Failed to load language file:', error);
-        document.body.innerHTML = '<p style="text-align: center; padding: 50px;">Error loading page content. Please try again later.</p>';
+        // Fallback: show an error
+        document.body.innerHTML = 'Error loading page content. Please try again later.';
     }
 });
 
