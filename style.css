@@ -202,7 +202,7 @@ hr {
 /* NEW: Form Status Messages */
 #form-status {
     position: absolute;
-    bottom: -60px; /* Position below the form section */
+    bottom: -80px; /* Position below the form section */
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 40px);
