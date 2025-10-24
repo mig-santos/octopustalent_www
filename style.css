@@ -49,7 +49,6 @@ header .hero-content {
     margin-bottom: 10px;
 }
 
-/* NEW: Style for the semantic <p> tag replacing <h1> */
 .site-title {
     margin: 0;
     font-size: 3em;
@@ -104,23 +103,20 @@ main {
     gap: 40px;
 }
 
-/* FIX: This ensures all images are the same size */
 .section-image {
     flex: 0 0 300px;
-    width: 300px;       /* Added explicit width */
-    height: 200px;      /* Added explicit height */
-    object-fit: cover;  /* Ensures image fills box without stretching */
+    width: 300px;       
+    height: 200px;      
+    object-fit: cover;  
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* NEW: This wrapper holds the text content in a section */
 .section-content {
-    flex: 1; /* Allows this div to fill the remaining space */
-    text-align: left; /* Ensures text is left-aligned */
+    flex: 1; 
+    text-align: left; 
 }
 
-/* UPDATED: Selectors are now more specific */
 .section-content h1,
 .section-content h2 {
     color: #001f3f;
@@ -129,7 +125,6 @@ main {
     margin-bottom: 20px;
 }
 
-/* UPDATED: Selectors are now more specific */
 .section-content p {
     font-size: 1.1em;
     margin-bottom: 15px;
@@ -144,18 +139,16 @@ hr {
     margin: 60px 0;
 }
 
-/* UPDATED: Removed text-align: center from the section */
+/* FIX: Removed position: relative, no longer needed */
 #contact {
     /* The .section styles already apply */
-    position: relative;
 }
 
-/* FIX: This makes the form the second column and fixes label alignment */
 #contact form {
-    flex: 1; /* Allows the form to take up space */
+    flex: 1; 
     max-width: 600px;
-    margin: 0; /* Removed old margin */
-    text-align: left; /* Fixes centered labels */
+    margin: 0; 
+    text-align: left; 
 }
 
 #contact label {
@@ -199,18 +192,19 @@ hr {
     background-color: #0056b3;
 }
 
-/* NEW: Form Status Messages */
+/* --- Form Status Explanation --- */
+/* FIX: This style is now much simpler and more reliable. */
+/* It will appear right below the button, inside the form. */
 #form-status {
-    position: absolute;
-    bottom: -60px; /* Position below the form section */
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 1160px;
+    width: 100%;
     padding: 15px;
+    margin-top: 20px; /* Adds space between the button and the message */
     border-radius: 6px;
     text-align: center;
     font-weight: 600;
+    /* It's hidden by default (no content) and will appear 
+      when the script adds text and a .success or .error class.
+    */
 }
 
 #form-status.success {
@@ -231,14 +225,13 @@ footer {
     color: white;
     text-align: center;
     padding: 30px;
-    margin-top: 60px; /* Added margin to avoid overlap with status message */
+    /* FIX: Removed margin-top, no longer needed */
     font-size: 0.95em;
     font-weight: 300;
 }
 
-/* Responsive design */
+/* --- Responsive design block --- */
 @media (max-width: 768px) {
-    /* UPDATED: Changed from h1 to .site-title */
     .site-title {
         font-size: 2.2em;
     }
@@ -258,27 +251,14 @@ footer {
         text-align: center;
     }
 
-    /* NEW: Ensures text content is centered on mobile */
     .section-content {
         text-align: center;
     }
 
-    /* NEW: Ensures form labels are still left-aligned on mobile */
     #contact form {
         text-align: left;
     }
     
-    #form-status {
-        position: static;
-        transform: none;
-        margin-top: 20px;
-        width: 100%;
-    }
-    
-    footer {
-        margin-top: 0;
-    }
-
     .section-image {
         flex: none;
         width: 100%;
@@ -286,3 +266,4 @@ footer {
         margin: 0 auto 20px;
     }
 }
+
