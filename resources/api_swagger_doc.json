@@ -1,1 +1,206 @@
-{"openapi":"3.0.0","info":{"title":"ORDS generated API for Data API/v1 - Corealis Lingote","version":"1.0.0"},"servers":[{"url":"http://emonitor.ewen-energy.com/ords/ewen/API/corealis/v1/"}],"paths":{"/channels":{"get":{"description":"Retrieve records from Data API/v1 - Corealis Lingote","security":[{"BasicAuth":[]},{"BearerAuth":[]},{"OAuth2":[]}],"responses":{"200":{"description":"The queried record.","content":{"application/json":{"schema":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object","properties":{"company_aggr_yn":{"$ref":"#/components/schemas/VARCHAR2"},"company_id":{"$ref":"#/components/schemas/NUMBER"},"dc_id":{"$ref":"#/components/schemas/NUMBER"},"has_cost_yn":{"$ref":"#/components/schemas/VARCHAR2"},"name":{"$ref":"#/components/schemas/VARCHAR2"},"sensor_type":{"$ref":"#/components/schemas/NUMBER"}}}}}}}}}},"parameters":[{"name":"company_aggr_yn","in":"path","schema":{"type":"string"},"required":true},{"name":"company_id","in":"path","schema":{"type":"integer"},"required":true},{"name":"cost_yn","in":"path","schema":{"type":"string"},"required":true},{"name":"dc_ids","in":"path","schema":{"type":"string"},"required":true},{"name":"dc_type_id","in":"path","schema":{"type":"integer"},"required":true}]}},"/daily_aggr_datapoints":{"get":{"description":"Retrieve records from Data API/v1 - Corealis Lingote","security":[{"BasicAuth":[]},{"BearerAuth":[]},{"OAuth2":[]}],"responses":{"200":{"description":"The queried record.","content":{"application/json":{"schema":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object","properties":{"con_dc_id":{"$ref":"#/components/schemas/NUMBER"},"dt":{"$ref":"#/components/schemas/VARCHAR2"},"xcost":{"$ref":"#/components/schemas/NUMBER"},"xvalue":{"$ref":"#/components/schemas/NUMBER"}}}}}}}}}},"parameters":[{"name":"dc_ids","in":"path","schema":{"type":"string"},"required":true},{"name":"from_dt","in":"path","schema":{"type":"string"},"required":true},{"name":"to_dt","in":"path","schema":{"type":"string"},"required":true}]}},"/sensor_types":{"get":{"description":"Retrieve records from Data API/v1 - Corealis Lingote","security":[{"BasicAuth":[]},{"BearerAuth":[]},{"OAuth2":[]}],"responses":{"200":{"description":"The queried record.","content":{"application/json":{"schema":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object","properties":{"aggr_function":{"$ref":"#/components/schemas/CHAR"},"descr":{"$ref":"#/components/schemas/VARCHAR2"},"id":{"$ref":"#/components/schemas/NUMBER"},"units":{"$ref":"#/components/schemas/VARCHAR2"}}}}}}}}}},"parameters":[]}}},"components":{"securitySchemes":{"BasicAuth":{"type":"http","scheme":"basic"},"BearerAuth":{"type":"http","scheme":"bearer"},"OAuth2":{"type":"oauth2","flows":{"implicit":{"authorizationUrl":"http://emonitor.ewen-energy.com/ords/ewen/oauth/auth","scopes":{}},"authorizationCode":{"authorizationUrl":"http://emonitor.ewen-energy.com/ords/ewen/oauth/auth","tokenUrl":"http://emonitor.ewen-energy.com/ords/ewen/oauth/token","scopes":{}},"clientCredentials":{"tokenUrl":"http://emonitor.ewen-energy.com/ords/ewen/oauth/token","scopes":{}}}}},"schemas":{"CHAR":{"type":"string"},"NUMBER":{"type":"number"},"VARCHAR2":{"type":"string"}}}}
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Data API/v1 - Corealis Lingote",
+      "version": "1.0.0",
+      "description": "REST API for energy monitoring data (channels, daily aggregates, sensor types)"
+    },
+    "servers": [
+      {
+        "url": "https://emonitor.ewen-energy.com/ords/ewen/API/corealis/v1/",
+        "description": "Production Server"
+      }
+    ],
+    "paths": {
+      "/channels": {
+        "get": {
+          "summary": "Get filtered list of channels",
+          "description": "Retrieve sensor channels with company and cost filters",
+          "parameters": [
+            {
+              "name": "company_aggr_yn",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "enum": ["Y", "N"], "example": "Y" },
+              "description": "Enable company aggregation? (Y/N)"
+            },
+            {
+              "name": "company_id",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "integer", "example": 10 },
+              "description": "Company identifier"
+            },
+            {
+              "name": "cost_yn",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "enum": ["Y", "N"], "example": "Y" },
+              "description": "Include cost channels? (Y/N)"
+            },
+            {
+              "name": "dc_ids",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "example": "1,2,3" },
+              "description": "Comma-separated list of Data Collector IDs"
+            },
+            {
+              "name": "dc_type_id",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "integer", "example": 4 },
+              "description": "Data Collector type ID"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of channels",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "company_aggr_yn": { "type": "string" },
+                            "company_id": { "type": "number" },
+                            "dc_id": { "type": "number" },
+                            "has_cost_yn": { "type": "string" },
+                            "name": { "type": "string" },
+                            "sensor_type": { "type": "number" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "items": [
+                      {
+                        "company_aggr_yn": "Y",
+                        "company_id": 10,
+                        "dc_id": 1,
+                        "has_cost_yn": "Y",
+                        "name": "Main Power Input",
+                        "sensor_type": 5
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/daily_aggr_datapoints": {
+        "get": {
+          "summary": "Get daily aggregated data",
+          "description": "Retrieve daily totals (value and cost) for specified data collectors and date range",
+          "parameters": [
+            {
+              "name": "dc_ids",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "example": "1,2" },
+              "description": "Comma-separated DC IDs"
+            },
+            {
+              "name": "from_dt",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "format": "date", "example": "2025-01-01" },
+              "description": "Start date (YYYY-MM-DD)"
+            },
+            {
+              "name": "to_dt",
+              "in": "query",
+              "required": false,
+              "schema": { "type": "string", "format": "date", "example": "2025-01-07" },
+              "description": "End date (YYYY-MM-DD)"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Daily aggregated datapoints",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "con_dc_id": { "type": "number" },
+                            "dt": { "type": "string", "format": "date" },
+                            "xcost": { "type": "number" },
+                            "xvalue": { "type": "number" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "items": [
+                      { "con_dc_id": 1, "dt": "2025-01-01", "xvalue": 2450.5, "xcost": 367.57 }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/sensor_types": {
+        "get": {
+          "summary": "Get all sensor types",
+          "description": "List available sensor types with units and aggregation functions",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Sensor types",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": { "type": "number" },
+                            "descr": { "type": "string" },
+                            "units": { "type": "string" },
+                            "aggr_function": { "type": "string", "maxLength": 1 }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "items": [
+                      { "id": 5, "descr": "Active Energy", "units": "kWh", "aggr_function": "S" }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CHAR": { "type": "string", "maxLength": 1 },
+        "NUMBER": { "type": "number" },
+        "VARCHAR2": { "type": "string" }
+      }
+    }
+  }
