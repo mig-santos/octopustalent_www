@@ -16,7 +16,50 @@
     }
   ],
   "paths": {
-    "/oauth/token": { /* unchanged – omitted for brevity */ },
+    "/oauth/token": {
+      "post": {
+        "summary": "Get access token (Client Credentials)",
+        "operationId": "getAccessToken",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "enum": ["client_credentials"],
+                    "example": "client_credentials"
+                  }
+                },
+                "required": ["grant_type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful token response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "access_token": "OdXwqIhtxdrRYQ-dOmSmhw",
+                  "token_type": "bearer",
+                  "expires_in": 3600
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
 
     "/channels": {
       "get": {
