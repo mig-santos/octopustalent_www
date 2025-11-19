@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Data API/v1 - Corealis Lingote",
+    "title": "eMonitor Data API/v1 - Corealis Lingote",
     "version": "1.0.0",
     "description": "REST API for energy monitoring data (channels, datapoints, daily aggregates, sensor types)\n\n**Authentication**\n\n1. First obtain a bearer token:\n   POST https://emonitor.ewen-energy.com/ords/ewen/oauth/token\n\n2. Add the header to every request below:\n   Authorization: Bearer <your-access-token>\n\nToken expires in 3600 seconds (1 hour)."
   },
@@ -108,7 +108,7 @@
                       "channel_id": 1,
                       "has_cost_yn": "Y",
                       "name": "Main Power Input",
-                      "sensor_type": 5
+                      "sensor_type_id": 5
                     },
                     {
                       "company_aggr_yn": "Y",
@@ -116,7 +116,7 @@
                       "channel_id": 2,
                       "has_cost_yn": "N",
                       "name": "Solar Production",
-                      "sensor_type": 6
+                      "sensor_type_id": 6
                     }
                   ],
                   "count": 148,
@@ -152,13 +152,13 @@
             "name": "from_dt",
             "required": true,
             "in": "query",
-            "schema": { "type": "string", "format": "date", "example": "2025-01-01 00:00" }
+            "schema": { "type": "string", "format": "date", "example": "2025-01-01" }
           },
           {
             "name": "to_dt",
             "required": true,
             "in": "query",
-            "schema": { "type": "string", "format": "date", "example": "2025-01-07 23:59" }
+            "schema": { "type": "string", "format": "date", "example": "2025-01-07" }
           },
           {
             "name": "skip",
