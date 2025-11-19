@@ -1,0 +1,376 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Data API/v1 - Corealis Lingote",
+    "version": "1.0.0",
+    "description": "REST API for energy monitoring data (channels, datapoints, daily aggregates, sensor types)\n\n**Authentication**\n\n1. First obtain a bearer token:\n   POST https://emonitor.ewen-energy.com/ords/ewen/oauth/token\n\n2. Add the header to every request below:\n   Authorization: Bearer <your-access-token>\n\nToken expires in 3600 seconds (1 hour)."
+  },
+  "servers": [
+    {
+      "url": "https://emonitor.ewen-energy.com/ords/ewen/API/corealis/v1/",
+      "description": "Production Server"
+    },
+    {
+      "url": "https://emonitor.ewen-energy.com/ords/ewen/",
+      "description": "OAuth Token Endpoint (separate base URL)"
+    }
+  ],
+  "paths": {
+    "/oauth/token": { /* unchanged – omitted for brevity */ },
+
+    "/channels": {
+      "get": {
+        "summary": "Get filtered list of channels",
+        "description": "Retrieve sensor channels with company and cost filters",
+        "tags": ["Data"],
+        "parameters": [
+          { "name": "company_aggr_yn", "in": "query", "schema": { "type": "string", "enum": ["Y", "N"], "example": "Y" } },
+          { "name": "company_id", "in": "query", "schema": { "type": "integer", "example": 10 } },
+          { "name": "cost_yn", "in": "query", "schema": { "type": "string", "enum": ["Y", "N"], "example": "Y" } },
+          {
+            "name": "channel_ids",
+            "in": "query",
+            "required": false,
+            "description": "One or more channel IDs, comma-separated (e.g. 1001 or 1001,2224,3333)",
+            "schema": { "type": "string" },
+            "style": "form",
+            "explode": false,
+            "example": "1001,2224"
+          },
+          { "name": "sensor_type_id", "in": "query", "schema": { "type": "integer", "example": 4 } },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip for pagination (offset). Default is 0.",
+            "schema": { "type": "integer", "example": 0, "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Maximum number of records to return per page. Default is 100.",
+            "schema": { "type": "integer", "example": 100, "default": 100 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of channels",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginatedChannelList" },
+                "example": {
+                  "items": [
+                    {
+                      "company_aggr_yn": "Y",
+                      "company_id": 10,
+                      "channel_id": 1,
+                      "has_cost_yn": "Y",
+                      "name": "Main Power Input",
+                      "sensor_type": 5
+                    },
+                    {
+                      "company_aggr_yn": "Y",
+                      "company_id": 10,
+                      "channel_id": 2,
+                      "has_cost_yn": "N",
+                      "name": "Solar Production",
+                      "sensor_type": 6
+                    }
+                  ],
+                  "count": 148,
+                  "hasMore": true,
+                  "size": 100,
+                  "skip": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/daily_aggr_datapoints": {
+      "get": {
+        "summary": "Get daily aggregated data",
+        "description": "Retrieve daily totals (value and cost) for specified data collectors and date range",
+        "tags": ["Data"],
+        "parameters": [
+          {
+            "name": "channel_ids",
+            "in": "query",
+            "required": true,
+            "description": "One or more channel IDs, comma-separated (e.g. 1001 or 1001,2224,3333)",
+            "schema": { "type": "string" },
+            "style": "form",
+            "explode": false,
+            "example": "1001,2224"
+          },
+          {
+            "name": "from_dt",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string", "format": "date", "example": "2025-01-01 00:00" }
+          },
+          {
+            "name": "to_dt",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string", "format": "date", "example": "2025-01-07 23:59" }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip for pagination (offset). Default is 0.",
+            "schema": { "type": "integer", "example": 0, "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Maximum number of records to return per page. Default is 100.",
+            "schema": { "type": "integer", "example": 100, "default": 100 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily aggregated datapoints",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginatedDailyAggregateList" },
+                "example": {
+                  "items": [
+                    { "channel_id": 114, "date": "2025-01-01", "value": 2450.5, "cost": 367.57 }
+                  ],
+                  "count": 87,
+                  "hasMore": true,
+                  "size": 100,
+                  "skip": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/datapoints": {
+      "get": {
+        "summary": "Data points",
+        "tags": ["Data"],
+        "parameters": [
+          {
+            "name": "from_dt",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "date", "example": "2025-01-01 00:00" }
+          },
+          {
+            "name": "to_dt",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "date", "example": "2025-01-01 12:00" }
+          },
+          {
+            "name": "channel_ids",
+            "in": "query",
+            "required": true,
+            "description": "One or more channel IDs, comma-separated (e.g. 1001 or 1001,2224,3333)",
+            "schema": { "type": "string" },
+            "style": "form",
+            "explode": false,
+            "example": "1001,2224"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip for pagination (offset). Default is 0.",
+            "schema": { "type": "integer", "example": 0, "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Maximum number of records to return per page. Default is 100.",
+            "schema": { "type": "integer", "example": 100, "default": 100 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Raw datapoints",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginatedDatapointList" },
+                "example": {
+                  "items": [
+                    {
+                      "channel_id": 10969,
+                      "date": "2025-10-12 03:30",
+                      "value": 0,
+                      "cost": 0
+                    },
+                    {
+                      "channel_id": 10969,
+                      "date": "2025-10-12 03:45",
+                      "value": 0,
+                      "cost": 0
+                    }
+                  ],
+                  "count": 149,
+                  "hasMore": true,
+                  "size": 100,
+                  "skip": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/sensor_types": {
+      "get": {
+        "summary": "Get all sensor types",
+        "description": "List available sensor types with units and aggregation functions",
+        "tags": ["Data"],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip for pagination (offset). Default is 0.",
+            "schema": { "type": "integer", "example": 0, "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Maximum number of records to return per page. Default is 100.",
+            "schema": { "type": "integer", "example": 100, "default": 100 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sensor types",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginatedSensorTypeList" },
+                "example": {
+                  "items": [
+                    { "id": 5, "description": "Active Energy", "units": "kWh", "aggr_function": "S" }
+                  ],
+                  "count": 23,
+                  "hasMore": false,
+                  "size": 100,
+                  "skip": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    }
+  },
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Enter your bearer token obtained from POST /oauth/token"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Client ID as username, Client Secret as password"
+      }
+    },
+    "schemas": {
+      "PaginatedChannelList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company_aggr_yn": { "type": "string" },
+                "company_id": { "type": "integer" },
+                "channel_id": { "type": "integer" },
+                "has_cost_yn": { "type": "string" },
+                "name": { "type": "string" },
+                "sensor_type": { "type": "integer" }
+              }
+            }
+          },
+          "count": { "type": "integer" },
+          "hasMore": { "type": "boolean" },
+          "size": { "type": "integer" },
+          "skip": { "type": "integer" }
+        }
+      },
+      "PaginatedDailyAggregateList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "channel_id": { "type": "integer" },
+                "date": { "type": "string" },
+                "value": { "type": "number" },
+                "cost": { "type": "number" }
+              }
+            }
+          },
+          "count": { "type": "integer" },
+          "hasMore": { "type": "boolean" },
+          "size": { "type": "integer" },
+          "skip": { "type": "integer" }
+        }
+      },
+      "PaginatedDatapointList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "channel_id": { "type": "integer" },
+                "date": { "type": "string" },
+                "value": { "type": "number" },
+                "cost": { "type": "number" }
+              }
+            }
+          },
+          "count": { "type": "integer" },
+          "hasMore": { "type": "boolean" },
+          "size": { "type": "integer" },
+          "skip": { "type": "integer" }
+        }
+      },
+      "PaginatedSensorTypeList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "integer" },
+                "description": { "type": "string" },
+                "units": { "type": "string" },
+                "aggr_function": { "type": "string" }
+              }
+            }
+          },
+          "count": { "type": "integer" },
+          "hasMore": { "type": "boolean" },
+          "size": { "type": "integer" },
+          "skip": { "type": "integer" }
+        }
+      }
+    }
+  }
+}
