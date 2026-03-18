@@ -21,8 +21,8 @@
       "p2": "Possuímos uma profunda especialização em soluções Oracle, incluindo a gestão de bases de dados, otimização de ambientes e desenvolvimento de aplicações de alto rendimento com Oracle APEX."
     },
     "technologies": {
-        "heading": "Tecnologias que Dominamos",
-        "intro": "Temos vasta experiência prática nas seguintes tecnologias, que utilizamos frequentemente em projetos para clientes e que valorizamos nos profissionais que colocamos.",
+        "heading": "Tech Stack",
+        "intro": "Temos vasta experiência prática nas seguintes tecnologias, utilizamo-as frequentemente em projetos em produção.",
         "group1": {
           "title": "Integração e Messaging",
           "item1": "Apache Kafka",
@@ -41,7 +41,7 @@
         "group3": {
           "title": "Infraestrutura e IoT",
           "item1": "Docker & Docker Compose",
-          "item2": "Experiência na liderança de gateways IoT e projetos de integração"
+          "item2": "Experiência na integração de gateways IoT"
         },
         "iotNote": "Sólido conhecimento prático em protocolos industriais e IoT, incluindo: MQTT, Modbus TCP, HTTP/HTTPS, SFTP, entre outros.",
         "outro": "Esta stack permite-nos entregar soluções robustas, escaláveis e prontas para produção — especialmente em ambientes industriais, empresariais e de dados em tempo real."

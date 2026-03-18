@@ -21,8 +21,8 @@
       "p2": "We possess deep expertise in Oracle solutions, including database management, environment optimization, and the development of high-performance applications with Oracle APEX."
     },
     "technologies": {
-      "heading": "Technologies We Master",
-      "intro": "We have deep hands-on experience with the following technologies, which we frequently use in client projects and look for in the professionals we place.",
+      "heading": "Tech Stack",
+      "intro": "We have deep hands-on experience with the following technologies, which we frequently use in client projects.",
       "group1": {
         "title": "Integration & Messaging",
         "item1": "Apache Kafka",
