@@ -19,15 +19,41 @@
       "heading": "As Nossas Competências",
       "p1": "A nossa equipa multidisciplinar é especialista num vasto leque de tecnologias. Oferecemos consultoria e implementação em: soluções IoT, automação de processos DevOps e CI/CD, desenvolvimento de backend, e formação de equipas técnicas.",
       "p2": "Possuímos uma profunda especialização em soluções Oracle, incluindo a gestão de bases de dados, otimização de ambientes e desenvolvimento de aplicações de alto rendimento com Oracle APEX."
-    }
+    },
+    "technologies": {
+        "heading": "Tecnologias que Dominamos",
+        "intro": "Temos vasta experiência prática nas seguintes tecnologias, que utilizamos frequentemente em projetos para clientes e que valorizamos nos profissionais que colocamos.",
+        "group1": {
+          "title": "Integração e Messaging",
+          "item1": "Apache Kafka",
+          "item2": "Zookeeper",
+          "item3": "Oracle Advanced Queuing",
+          "item4": "Mosquitto (MQTT Broker)"
+        },
+        "group2": {
+          "title": "Bases de Dados e Desenvolvimento",
+          "item1": "PostgreSQL",
+          "item2": "MySQL",
+          "item3": "Oracle Database",
+          "item4": "Oracle APEX",
+          "item5": "PL/SQL"
+        },
+        "group3": {
+          "title": "Infraestrutura e IoT",
+          "item1": "Docker & Docker Compose",
+          "item2": "Experiência na liderança de gateways IoT e projetos de integração"
+        },
+        "iotNote": "Sólido conhecimento prático em protocolos industriais e IoT, incluindo: MQTT, Modbus TCP, HTTP/HTTPS, SFTP, entre outros.",
+        "outro": "Esta stack permite-nos entregar soluções robustas, escaláveis e prontas para produção — especialmente em ambientes industriais, empresariais e de dados em tempo real."
+      }
   },
   "contactPage": {
     "title": "Contacto - Octopustalent",
     "heading": "Contacte-nos",
     "intro": "Fale connosco sobre os seus desafios de TI. A nossa equipa está pronta para ajudar a transformar o seu negócio com soluções inovadoras e à medida das suas necessidades.",
-    "email": "contact@octopustalent.com",
+    "email": "contact@octopustalent.pt",
     "phone": "+351 929 064 777",
-    "emailHref": "mailto:contact@octopustalent.com",
+    "emailHref": "mailto:contact@octopustalent.pt",
     "phoneHref": "tel:+351929064777",
     "form": {
       "name": "Nome:",

@@ -1,5 +1,4 @@
 /* style.css */
-/* Updated to match vilacreatives.com: Dark navy (#001f3f) for header/footer, white text, light gray (#f8f9fa) body bg, blue accents (#007bff). Font: Inter (sans-serif). Minimalist layout with full-width hero bg image, section images floated left, subtle shadows. Responsive. */
 
 * {
     margin: 0;
@@ -219,7 +218,6 @@ hr {
     border: 1px solid #f5c6cb;
 }
 
-
 footer {
     background-color: #001f3f;
     color: white;
@@ -230,7 +228,87 @@ footer {
     font-weight: 300;
 }
 
-/* --- Responsive design block --- */
+/* ─────────────────────────────────────────────── */
+/*     New styles for the technologies section      */
+/* ─────────────────────────────────────────────── */
+
+.tech-groups {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin: 2rem 0 3rem;
+}
+
+.tech-group h3 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #001f3f;
+    margin-bottom: 1.1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.tech-group h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    border-radius: 2px;
+}
+
+.tech-group ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tech-group li {
+    margin-bottom: 0.75rem;
+    font-size: 1.05em;
+    color: #444;
+    position: relative;
+    padding-left: 1.8rem;
+}
+
+.tech-group li::before {
+    content: "•";
+    position: absolute;
+    left: 0.1rem;
+    color: #007bff;
+    font-size: 1.4em;
+    line-height: 1;
+}
+
+.tech-note {
+    margin-top: 1.2rem;
+    font-size: 1.05em;
+    color: #555;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.tech-outro {
+    margin-top: 2.5rem;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #001f3f;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* ─────────────────────────────────────────────── */
+/*              Responsive adjustments              */
+/* ─────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+    .tech-groups {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .site-title {
         font-size: 2.2em;
@@ -265,5 +343,25 @@ footer {
         max-width: 300px;
         margin: 0 auto 20px;
     }
-}
 
+    .tech-groups {
+        gap: 2.8rem;
+    }
+
+    .tech-group h3 {
+        text-align: center;
+    }
+
+    .tech-group h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .tech-group li {
+        text-align: left;
+    }
+
+    .tech-outro {
+        padding: 0 10px;
+    }
+}
