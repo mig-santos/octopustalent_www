@@ -14,21 +14,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="hero" style="background-image: url('images/hero-bg.jpg');">
-        <nav>
-            <ul>
-                <li><a href="index.html" data-key="nav.home"></a></li>
-                <li><a href="contact.html" data-key="nav.contact"></a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <img src="images/logo.png" alt="Octopustalent" class="logo">
-            
-            <p class="site-title" data-key="common.siteTitle"></p> 
-            <p data-key="common.siteDescription"></p>
+
+    <!-- Sticky Header with Hamburger -->
+    <header class="sticky-header">
+        <div class="header-container">
+            <a href="#" class="logo-link">
+                <img src="images/logo.png" alt="Octopustalent" class="logo">
+            </a>
+
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#what-we-do" data-key="nav.whatWeDo"></a></li>
+                    <li><a href="#expertise" data-key="nav.expertise"></a></li>
+                    <li><a href="#tech-stack" data-key="nav.techStack"></a></li>
+                    <li><a href="#contact" data-key="nav.contact"></a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <button class="close-menu" aria-label="Close menu">×</button>
+        <ul>
+            <li><a href="#what-we-do" data-key="nav.whatWeDo"></a></li>
+            <li><a href="#expertise" data-key="nav.expertise"></a></li>
+            <li><a href="#tech-stack" data-key="nav.techStack"></a></li>
+            <li><a href="#contact" data-key="nav.contact"></a></li>
+        </ul>
+    </div>
+
+    <!-- Hero 
+    <section class="hero" id="home" style="background-image: url('images/hero-bg.jpg');">
+       
+        <div class="hero-content">
+            <img src="images/logo.png" alt="Octopustalent" class="logo"> 
+            <p class="site-title" data-key="common.siteTitle"></p>
+            <p data-key="common.siteDescription"></p>
+        </div>
+       
+    </section>
+-->
     <main>
         <section id="what-we-do" class="section">
             <img src="images/iot-image.jpg" alt="IoT Integration Illustration" class="section-image">
@@ -39,9 +71,7 @@
             </div>
         </section>
 
-        <hr>
-
-        <section id="how-we-do-it" class="section">
+        <section id="expertise" class="section">
             <img src="images/integration-image.jpg" alt="Technology Integration Illustration" class="section-image">
             <div class="section-content">
                 <h2 data-key="homePage.howWeDoIt.heading"></h2>
@@ -50,14 +80,10 @@
             </div>
         </section>
 
-        <hr>
-
-        <!-- Technologies section -->
-        <section id="technologies" class="section">
+        <section id="tech-stack" class="section">
             <img src="images/tech_stack.jpg" alt="Technologies & Stack Illustration" class="section-image">
             <div class="section-content">
                 <h2 data-key="homePage.technologies.heading"></h2>
-                
                 <p data-key="homePage.technologies.intro"></p>
 
                 <div class="tech-groups">
@@ -96,6 +122,35 @@
             </div>
         </section>
 
+        <section id="contact" class="section contact-section">
+            <div class="section-content">
+                <h2 data-key="contactPage.heading"></h2>
+                <p data-key="contactPage.intro"></p>
+
+                <form id="contact-form">
+                    <label data-key="contactPage.form.name"></label>
+                    <input type="text" name="name" data-key="contactPage.form.namePlaceholder" placeholder="" required>
+
+                    <label data-key="contactPage.form.email"></label>
+                    <input type="email" name="email" data-key="contactPage.form.emailPlaceholder" placeholder="" required>
+
+                    <label data-key="contactPage.form.subject"></label>
+                    <input type="text" name="subject" data-key="contactPage.form.subjectPlaceholder" placeholder="" required>
+
+                    <label data-key="contactPage.form.message"></label>
+                    <textarea name="message" data-key="contactPage.form.messagePlaceholder" placeholder="" required></textarea>
+
+                    <button type="submit" data-key="contactPage.form.submit"></button>
+                </form>
+
+                <div id="form-status"></div>
+
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:contact@octopustalent.pt" data-key="contactPage.email"></a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+351929064777" data-key="contactPage.phone"></a></p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

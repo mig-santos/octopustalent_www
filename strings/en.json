@@ -6,6 +6,9 @@
   },
   "nav": {
     "home": "Home",
+    "whatWeDo": "What We Do",
+    "expertise": "Our Expertise",
+    "techStack": "Tech Stack",
     "contact": "Contact"
   },
   "homePage": {
